@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:settle_up_trips/models/models.dart';
 import 'package:settle_up_trips/pages/home.dart';
 import 'package:provider/provider.dart';
 
@@ -14,7 +15,7 @@ class MyApp extends StatelessWidget {
     return ChangeNotifierProvider(
       create: (context) => MyAppState(),
       child: MaterialApp(
-        title: 'First Flutter App', // Titulo del explorador
+        title: 'Settle Up Trips', // Titulo del explorador
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
           fontFamily: 'Oswald',
@@ -29,5 +30,17 @@ class MyApp extends StatelessWidget {
 }
 
 class MyAppState extends ChangeNotifier {
-  var goku = 'goku es lindo';
+  var transactionHistory = <Transaction>[];
+
+  GlobalKey? historyListKey;
+
+  void addTransactionItem(Transaction transaction) {
+    transactionHistory.add(transaction);
+    notifyListeners();
+  }
+
+  void removeTransactionItem(Transaction transaction) {
+    transactionHistory.remove(transaction);
+    notifyListeners();
+  }
 }
