@@ -11,7 +11,8 @@ class AddTransactionDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var appState = context.watch<MyAppState>();
-    return TextButton.icon(
+    var colorScheme = Theme.of(context).colorScheme;
+    return FloatingActionButton.extended(
       label: Text(
         'Agregar Transacción',
         style: TextStyle(color: Colors.white),
@@ -22,8 +23,7 @@ class AddTransactionDialog extends StatelessWidget {
           builder: (BuildContext context) => AlertDialog(
             title: const Text('Agregar Transacción'),
             content: Column(mainAxisSize: MainAxisSize.min, children: <Widget>[
-              const Text(
-                  'Aquí puedes agregar una nueva transacción a la lista de transacciones.'),
+              const Text('Aquí puedes agregar una nueva transacción.'),
               const SizedBox(height: 10.0),
               TextField(
                 controller: descriptionController,
@@ -72,6 +72,7 @@ class AddTransactionDialog extends StatelessWidget {
         Icons.add,
         color: Colors.white,
       ),
+      backgroundColor: colorScheme.onSecondaryContainer,
     );
   }
 }

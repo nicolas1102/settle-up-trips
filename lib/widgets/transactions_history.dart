@@ -58,12 +58,14 @@ class _TransactionsHistory extends State<TransactionsHistory> {
                   fontSize: 12.0),
             ),
             trailing: IconButton(
-              icon: Icon(Icons.delete_outline),
+              icon: Icon(
+                Icons.delete_outline,
+              ),
               color: theme.colorScheme.primary,
               onPressed: () => appState.removeTransactionItem(transaction),
+              padding: const EdgeInsets.only(right: 0, left: 0),
             ),
           ),
-        
         Padding(
           padding: const EdgeInsets.only(
             bottom: 40,
