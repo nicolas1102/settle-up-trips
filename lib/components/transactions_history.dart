@@ -44,13 +44,13 @@ class _TransactionsHistory extends State<TransactionsHistory> {
                   style: TextStyle(fontWeight: FontWeight.bold),
                 ),
                 Text(
-                  "\$${transaction.amount.toString()}",
+                  "\$${NumberFormat.currency(locale: 'es_CO', symbol: '', decimalDigits: 2).format(transaction.amount)}",
                   semanticsLabel: "\$ ${transaction.amount.toString()}",
                 ),
               ],
             ),
             subtitle: Text(
-              DateFormat('dd MMMM yyyy').format(transaction.date),
+              DateFormat('hh:mm - dd MMMM yyyy').format(transaction.date),
               semanticsLabel: transaction.date.toString(),
               style: TextStyle(
                   fontWeight: FontWeight.w300,
@@ -63,51 +63,13 @@ class _TransactionsHistory extends State<TransactionsHistory> {
               onPressed: () => appState.removeTransactionItem(transaction),
             ),
           ),
+        
+        Padding(
+          padding: const EdgeInsets.only(
+            bottom: 40,
+          ),
+        ),
       ],
     );
-
-    // ShaderMask(
-    //   shaderCallback: (bounds) => _maskingGradient.createShader(bounds),
-    //   blendMode: BlendMode.dstIn,
-    //   child: AnimatedList(
-    //     key: _key,
-    //     initialItemCount: appState.transactionHistory.length,
-    //     itemBuilder: (context, index, animation) {
-    //       final transaction = appState.transactionHistory[index];
-    //       print(transaction);
-    //       return SizeTransition(
-    //         sizeFactor: animation,
-    //         child: Expanded(
-    //           child: TextButton.icon(
-    //             iconAlignment: IconAlignment.end,
-    //             onPressed: () {
-    //               appState.removeTransactionItem(transaction);
-    //             },
-    //             icon: Icon(
-    //               Icons.delete_outlined,
-    //               size: 20,
-    //             ),
-    //             label: MergeSemantics(
-    //               child: Wrap(
-    //                 children: [
-    //                   Text(
-    //                     transaction.amount.toString(),
-    //                     semanticsLabel: transaction.amount.toString(),
-    //                     style: TextStyle(fontWeight: FontWeight.bold),
-    //                   ),
-    //                   Text(
-    //                     transaction.date.toString(),
-    //                     semanticsLabel: transaction.amount.toString(),
-    //                     style: TextStyle(fontWeight: FontWeight.bold),
-    //                   )
-    //                 ],
-    //               ),
-    //             ),
-    //           ),
-    //         ),
-    //       );
-    //     },
-    //   ),
-    // );
   }
 }

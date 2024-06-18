@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:settle_up_trips/main.dart';
 import 'package:settle_up_trips/models/models.dart';
 
-class AddTransaction extends StatelessWidget {
+class AddTransactionDialog extends StatelessWidget {
   // control de datos del dialog
   final amountController = TextEditingController();
   final descriptionController = TextEditingController();
@@ -11,7 +11,11 @@ class AddTransaction extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var appState = context.watch<MyAppState>();
-    return FloatingActionButton(
+    return TextButton.icon(
+      label: Text(
+        'Agregar Transacción',
+        style: TextStyle(color: Colors.white),
+      ),
       onPressed: () {
         showDialog<String>(
           context: context,
@@ -32,15 +36,19 @@ class AddTransaction extends StatelessWidget {
               TextField(
                 controller: amountController,
                 decoration: const InputDecoration(
-                  border: OutlineInputBorder(),
-                  labelText: 'Monto',
-                ),
+                    border: OutlineInputBorder(),
+                    labelText: 'Monto',
+                    prefixIcon: Icon(Icons.attach_money_sharp)),
                 keyboardType: TextInputType.number,
               ),
             ]),
             actions: <Widget>[
               TextButton(
-                onPressed: () => Navigator.pop(context, 'Cancel'),
+                onPressed: () {
+                  amountController.text = '';
+                  descriptionController.text = '';
+                  Navigator.pop(context, 'Cancel');
+                },
                 child: const Text('Cancelar'),
               ),
               TextButton(
@@ -60,8 +68,10 @@ class AddTransaction extends StatelessWidget {
           ),
         );
       },
-      backgroundColor: const Color(0xfff7f8f8),
-      child: Icon(Icons.add),
+      icon: Icon(
+        Icons.add,
+        color: Colors.white,
+      ),
     );
   }
 }

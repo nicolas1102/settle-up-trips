@@ -20,10 +20,10 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           // fontFamily: 'Oswald',
           useMaterial3: true,
-          colorScheme: ColorScheme.fromSeed(
-              seedColor: const Color.fromARGB(255, 4, 6, 43)),
+          colorScheme:
+              ColorScheme.fromSeed(seedColor: Color.fromARGB(255, 4, 6, 43)),
         ),
-        home: const HomePage(),
+        home: HomePage(),
       ),
     );
   }
@@ -31,18 +31,22 @@ class MyApp extends StatelessWidget {
 
 class MyAppState extends ChangeNotifier {
   var transactionHistory = <Transaction>[];
+  int total = 0;
 
   GlobalKey? transactionHistoryListKey;
 
   void addTransactionItem(Transaction transaction) {
     transactionHistory.insert(0, transaction);
-    var animatedList = transactionHistoryListKey?.currentState as AnimatedListState?;
+    var animatedList =
+        transactionHistoryListKey?.currentState as AnimatedListState?;
     animatedList?.insertItem(0);
+    total = total + transaction.amount;
     notifyListeners();
   }
 
   void removeTransactionItem(Transaction transaction) {
     transactionHistory.remove(transaction);
+    total = total - transaction.amount;
     notifyListeners();
   }
 }
