@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:settle_up_trips/components/HistoryListView.dart';
-import 'package:settle_up_trips/main.dart';
+import 'package:settle_up_trips/components/add_transaction_dialog.dart';
+import 'package:settle_up_trips/components/transactions_history.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -10,34 +9,13 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: appBar(context),
-      body: HistoryListView(),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          showModalBottomSheet<void>(
-            context: context,
-            builder: (BuildContext context) {
-              return Container(
-                width: double.infinity,
-                height: 300,
-                padding: EdgeInsets.all(20.0),
-                child: Column(
-                  children: <Widget>[
-                    Text('Título del BottomSheet'),
-                  ],
-                ),
-              );
-            },
-          );
-        },
-        backgroundColor: const Color(0xfff7f8f8),
-        child: Icon(Icons.add),
-      ),
+      body: TransactionsHistory(),
+      floatingActionButton: AddTransaction(),
     );
   }
 }
 
 AppBar appBar(BuildContext context) {
-  var appState = context.watch<MyAppState>();
   return AppBar(
     title: const Text(
       'Settle Up Trips',

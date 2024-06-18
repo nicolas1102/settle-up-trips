@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
         title: 'Settle Up Trips', // Titulo del explorador
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
-          fontFamily: 'Oswald',
+          // fontFamily: 'Oswald',
           useMaterial3: true,
           colorScheme: ColorScheme.fromSeed(
               seedColor: const Color.fromARGB(255, 4, 6, 43)),
@@ -32,10 +32,12 @@ class MyApp extends StatelessWidget {
 class MyAppState extends ChangeNotifier {
   var transactionHistory = <Transaction>[];
 
-  GlobalKey? historyListKey;
+  GlobalKey? transactionHistoryListKey;
 
   void addTransactionItem(Transaction transaction) {
-    transactionHistory.add(transaction);
+    transactionHistory.insert(0, transaction);
+    var animatedList = transactionHistoryListKey?.currentState as AnimatedListState?;
+    animatedList?.insertItem(0);
     notifyListeners();
   }
 
